@@ -1,8 +1,10 @@
 import { AToB, BToA, BindableValue, RecordWrapppedOrPureValues, Storage, Unsubscribe } from '../core/Storage';
-import {Parameters, ElementFunction, createElement, ElementChildren, Properties} from './SlothViewElement';
+import {ElementFunction, createElement, ElementChildren, Properties} from './SlothViewElement';
 
+export type Attributes = Record<string, any>;
 type ControlStorageTransformer<FieldType> = <TransformType>(aToB: (a: FieldType) => TransformType, bToA: (b: TransformType) => FieldType) => BindableValue<TransformType>
 type ControlStorageTransformers<Fields> = {[Property in keyof Fields]: ControlStorageTransformer<Fields[Property]>}
+
 export abstract class SlothViewComponentStorage<ElementType extends HTMLElement, Props extends Record<string, any>> {
     private _element!: ElementType;
     private _tag: string;
@@ -54,7 +56,7 @@ export abstract class SlothViewComponentStorage<ElementType extends HTMLElement,
     }
 
 
-    protected onPropSet(prop: keyof Props, cb: (value: Props[typeof prop]) => void): void {
+    protected onPropSet(prop: keyof Props, cb: (value: Props[keyof Props]) => void): void {
         this._disableSubscribes.push(this.props.onSet()[prop](cb));
     }
 
@@ -85,7 +87,7 @@ export abstract class SlothViewComponentStorage<ElementType extends HTMLElement,
     }
 
     public render(
-        params: Parameters = {}, 
+        params: Attributes = {}, 
         props: RecordWrapppedOrPureValues<Props>,
         children: ElementChildren = [],
         onMount?: (that: ElementType) => void): ElementFunction<ElementType> {
@@ -114,7 +116,7 @@ export abstract class SlothViewComponentStorage<ElementType extends HTMLElement,
     ): ElementChildren;
 
     protected renderRoot(
-        params: Parameters = {}, 
+        params: Attributes = {}, 
         children: ElementChildren = [],
         onMount?: (that: ElementType) => void): ElementFunction<ElementType> {
         return createElement(this._tag, params, children, (that: ElementType) => {

@@ -57,10 +57,10 @@ export type RecordWrappedValues<Fields> = {
 export type AToB<Type, TransformType> = (a: Type) => TransformType;
 export type BToA<Type, TransformType> = (b: TransformType) => Type;
 
-type Setters<Fields> = {[Property in keyof Fields] : (value: Fields[Property]) => Setters<Fields>};
-type Getters<Fields> = {[Property in keyof Fields] : Fields[Property]};
-type Subscribers<Fields> = {[Property in keyof Fields] : (cb: (value: Fields[Property]) => void) => Unsubscribe};
-type Transformers<Fields> = {[Property in keyof Fields]: <TransformType>(aToB: (a: Fields[Property]) => TransformType, bToA: (b: TransformType) => Fields[Property]) => [BindableValue<TransformType>, Unsubscribe]}
+export type Setters<Fields> = {[Property in keyof Fields] : (value: Fields[Property]) => Setters<Fields>};
+export type Getters<Fields> = {[Property in keyof Fields] : Fields[Property]};
+export type Subscribers<Fields> = {[Property in keyof Fields] : (cb: (value: Fields[Property]) => void) => Unsubscribe};
+export type Transformers<Fields> = {[Property in keyof Fields]: <TransformType>(aToB: (a: Fields[Property]) => TransformType, bToA: (b: TransformType) => Fields[Property]) => [BindableValue<TransformType>, Unsubscribe]}
 
 export class Storage<Fields extends Record<string, any>> {
     private _bindableFields: RecordWrappedValues<Fields>;
