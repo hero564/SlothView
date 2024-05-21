@@ -1,0 +1,31 @@
+{
+  "name": "@hero564/slothview",
+  "version": "1.0.0",
+  "description": "Some kind of front-end apps framework developed in educational purposes. Started as part of other project and moved into separate one.",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hero564/SlothView.git"
+  },
+  "keywords": [
+    "ts",
+    "typescript",
+    "js",
+    "node",
+    "front",
+    "frontend",
+    "framework"
+  ],
+  "author": "Volodymyr Kushnir",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hero564/SlothView/issues"
+  },
+  "homepage": "https://github.com/hero564/SlothView#readme",
+  "dependencies": {
+    "typescript": "^5.4.5"
+  }
+}
